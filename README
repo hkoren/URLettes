@@ -1,0 +1,85 @@
+# Google Search Redirect  g.kmz.me/_____
+<VirtualHost *>
+ServerName g.kmz.me
+RewriteEngine on
+RewriteRule   ^/(.*)  http://www.google.com/search?q=$1  [L]
+</VirtualHost>
+
+# Google Images Redirect   i.kmz.me/_____
+<VirtualHost *>
+ServerName i.kmz.me
+RewriteEngine on
+RewriteRule   ^/(.*)  http://images.google.com/images?q=$1  [L]
+</VirtualHost>
+
+# Google Maps Redirect     m.kmz.me/_____
+<VirtualHost *>
+ServerName m.kmz.me
+RewriteEngine on
+RewriteRule   ^/(.*)  http://maps.google.com/?q=$1  [L]
+</VirtualHost>
+
+# Wikipedia Redirect       w.kmz.me/_____
+<VirtualHost *>
+ServerName w.kmz.me
+RewriteEngine on
+RewriteRule   ^/(.*)  http://en.wikipedia.org/wiki/$1  [L]
+</VirtualHost>
+
+# Ebay Redirect       w.kmz.me/_____
+<VirtualHost *>
+ServerName e.kmz.me
+RewriteEngine on
+RewriteRule ^/(.*) http://shop.ebay.com/?_nkw=$1 [L]
+</VirtualHost>
+
+# Google Shopper Redirect       s.kmz.me/_____
+<VirtualHost *>
+ServerName s.kmz.me
+RewriteEngine on
+RewriteRule   ^/(.*)  http://www.google.com/search?q=$1&tbs=shop%3A1  [L]
+</VirtualHost>
+
+# Bing Redirect       b.kmz.me/_____
+<VirtualHost *>
+ServerName b.kmz.me
+RewriteEngine on
+RewriteRule ^/(.*) http://www.bing.com/search?q=$1 [L]
+</VirtualHost>
+
+# Twitter Redirect       w.kmz.me/_____
+<VirtualHost *>
+ServerName t.kmz.me
+DocumentRoot /vhosts/kmz.me/t/
+RewriteEngine on
+RewriteRule   ^/(.*)  /t.php?query=$1  [L,NE,QSA]
+</VirtualHost>
+
+
+Contents of t.php Twitter Redirect PHP/Javascript:
+--------------------------------------------------
+<html><head><title>redirecting...</title>
+<body><script language="JavaScript">
+var loc="http://twitter.com/\#!/search/<?echo $_GET['query']?>"+(location.hash!=''?escape(location.hash):'');
+window.location.href=loc;
+</script></body></html>
+
+# Wiktionary Redirect         d.kmz.me/_____
+<VirtualHost *>
+ServerName d.kmz.me
+RewriteEngine on
+RewriteRule ^/(.*) http://en.wiktionary.org/wiki/$1 [L]
+</VirtualHost>
+
+# Wikiquote Redirect          q.kmz.me/_____
+<VirtualHost *>
+ServerName q.kmz.me
+DocumentRoot /vhosts/kmz.me/q/
+RewriteEngine on
+RewriteRule   ^/(.*)  /q.php?query=$1  [L,NE,QSA]
+</VirtualHost>
+
+Contents of q.php Wikiquote Redirect PHP:
+-----------------------------------------
+<? header("Location: http://en.wikiquote.org/wiki/".str_replace(' ','_',ucwords($_GET['query']))); ?>
+
