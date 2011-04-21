@@ -26,7 +26,7 @@ RewriteEngine on
 RewriteRule   ^/(.*)  http://en.wikipedia.org/wiki/$1  [L]
 </VirtualHost>
 
-# Ebay Redirect       w.kmz.me/_____
+# Ebay Redirect       e.kmz.me/_____
 <VirtualHost *>
 ServerName e.kmz.me
 RewriteEngine on
@@ -47,7 +47,7 @@ RewriteEngine on
 RewriteRule ^/(.*) http://www.bing.com/search?q=$1 [L]
 </VirtualHost>
 
-# Twitter Redirect       w.kmz.me/_____
+# Twitter Redirect       t.kmz.me/_____
 <VirtualHost *>
 ServerName t.kmz.me
 DocumentRoot /vhosts/kmz.me/t/
@@ -58,11 +58,7 @@ RewriteRule   ^/(.*)  /t.php?query=$1  [L,NE,QSA]
 
 Contents of t.php Twitter Redirect PHP/Javascript:
 --------------------------------------------------
-<html><head><title>redirecting...</title>
-<body><script language="JavaScript">
-var loc="http://twitter.com/\#!/search/<?echo $_GET['query']?>"+(location.hash!=''?escape(location.hash):'');
-window.location.href=loc;
-</script></body></html>
+<!DOCTYPE html><title>Redirecting...</title><script>location='http://twitter.com/#!search/<?php echo $_GET['query']; ?>'+escape(location.hash)</script>
 
 # Wiktionary Redirect         d.kmz.me/_____
 <VirtualHost *>
@@ -81,5 +77,4 @@ RewriteRule   ^/(.*)  /q.php?query=$1  [L,NE,QSA]
 
 Contents of q.php Wikiquote Redirect PHP:
 -----------------------------------------
-<? header("Location: http://en.wikiquote.org/wiki/".str_replace(' ','_',ucwords($_GET['query']))); ?>
-
+<?php header('Location: http://en.wikiquote.org/wiki/' . str_replace(' ', '_', ucwords($_GET['query']))); ?>
